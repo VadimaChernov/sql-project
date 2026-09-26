@@ -12,6 +12,13 @@ func InsertRow(ctx context.Context, conn *pgx.Conn, task TaskModel) error {
 	VALUES ($1, $2, $3, $4 );
 	`
 
-	_, err := conn.Exec(ctx, sqlQueri, task)
+	_, err := conn.Exec(
+		ctx,
+		sqlQueri,
+		task.Title,
+		task.Description,
+		task.Completed,
+		task.CreatedAt,
+	)
 	return err
 }
