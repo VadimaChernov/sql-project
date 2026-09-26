@@ -1,39 +1,43 @@
 package main
 
 import (
-	"context"
 	"fmt"
-
-	simpleconection "hithab.com/otvs/bd/simple_conection"
-	simplesql "hithab.com/otvs/bd/simple_sql"
+	"os"
 )
 
 func main() {
-	ctx := context.Background()
-
-	conn, err := simpleconection.CreateConnection(ctx)
-	if err != nil {
-		panic(err)
+	val := os.Getenv("phone_number")
+	if val != "" {
+		fmt.Println("val", val)
+	} else {
+		fmt.Println("переменная val не задана")
 	}
-	if err := simplesql.CreateTable(ctx, conn); err != nil {
-		panic(err)
-	}
+	/*ctx := context.Background()
 
-	tasks, err := simplesql.SelecktRows(ctx, conn)
-	if err != nil {
-		panic(err)
-	}
-	for _, task := range tasks {
-		if task.ID == 2 {
-			task.Title = "покормить кошку"
-
-			if err := simplesql.UpdateTasks(ctx, conn, task); err != nil {
-				panic(err)
-
-			}
-			break
+		conn, err := simpleconection.CreateConnection(ctx)
+		if err != nil {
+			panic(err)
 		}
-	}
+		if err := simplesql.CreateTable(ctx, conn); err != nil {
+			panic(err)
+		}
 
-	fmt.Println("succeed")
+		tasks, err := simplesql.SelecktRows(ctx, conn)
+		if err != nil {
+			panic(err)
+		}
+		for _, task := range tasks {
+			if task.ID == 2 {
+				task.Title = "покормить кошку"
+
+				if err := simplesql.UpdateTasks(ctx, conn, task); err != nil {
+					panic(err)
+
+				}
+				break
+			}
+		}
+
+		fmt.Println("succeed")
+	}*/
 }
