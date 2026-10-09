@@ -2,17 +2,34 @@ package main
 
 import (
 	"fmt"
-	"os"
+
+	httpserver "hithab.com/otvs/bd/http_server"
 )
 
 func main() {
+	fmt.Println("запуск http сервера")
+
+	err := httpserver.StartHTTPserver()
+
+	if err != nil {
+		fmt.Println("ошибка во время работы сервера", err)
+	} else {
+		fmt.Println("сервер завершился успешно")
+	}
+
+	/*_, err := os.Create("out/newfile.txt")
+	if err != nil {
+		panic(err)
+	}
+
+
 	val := os.Getenv("phone_number")
 	if val != "" {
 		fmt.Println("val", val)
 	} else {
 		fmt.Println("переменная val не задана")
 	}
-	/*ctx := context.Background()
+	ctx := context.Background()
 
 		conn, err := simpleconection.CreateConnection(ctx)
 		if err != nil {
